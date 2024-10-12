@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penghitungan Bunga Majemuk dan Bunga Tunggal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .result span {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Responsif */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Penghitungan Bunga Majemuk dan Bunga Tunggal</h1>
+
+    <!-- Bunga Tunggal -->
+    <div class="container">
+        <h2>Bunga Tunggal</h2>
+        <label for="principal-tunggal">Jumlah Awal (Pokok):</label>
+        <input type="number" id="principal-tunggal" placeholder="Masukkan jumlah pokok">
+
+        <label for="rate-tunggal">Tingkat Bunga (% per tahun):</label>
+        <input type="number" id="rate-tunggal" placeholder="Masukkan tingkat bunga">
+
+        <label for="time-tunggal">Jangka Waktu (tahun):</label>
+        <input type="number" id="time-tunggal" placeholder="Masukkan jangka waktu">
+
+        <button onclick="hitungBungaTunggal()">Hitung Bunga Tunggal</button>
+
+        <div class="result" id="result-tunggal"></div>
+    </div>
+
+    <!-- Bunga Majemuk -->
+    <div class="container">
+        <h2>Bunga Majemuk</h2>
+        <label for="principal-majemuk">Jumlah Awal (Pokok):</label>
+        <input type="number" id="principal-majemuk" placeholder="Masukkan jumlah pokok">
+
+        <label for="rate-majemuk">Tingkat Bunga (% per tahun):</label>
+        <input type="number" id="rate-majemuk" placeholder="Masukkan tingkat bunga">
+
+        <label for="time-majemuk">Jangka Waktu (tahun):</label>
+        <input type="number" id="time-majemuk" placeholder="Masukkan jangka waktu">
+
+        <label for="n-majemuk">Frekuensi Penghitungan per Tahun:</label>
+        <input type="number" id="n-majemuk" placeholder="Masukkan frekuensi penghitungan">
+
+        <button onclick="hitungBungaMajemuk()">Hitung Bunga Majemuk</button>
+
+        <div class="result" id="result-majemuk"></div>
+    </div>
+
+    <footer>
+        &copy; 2024 Penghitungan Bunga. All Rights Reserved.
+    </footer>
+
+    <script>
+        // Fungsi untuk menghitung bunga tunggal
+        function hitungBungaTunggal() {
+            var principal = parseFloat(document.getElementById('principal-tunggal').value);
+            var rate = parseFloat(document.getElementById('rate-tunggal').value) / 100;
+            var time = parseFloat(document.getElementById('time-tunggal').value);
+
+            var bungaTunggal = principal * rate * time;
+            var total = principal + bungaTunggal;
+
+            document.getElementById('result-tunggal').innerHTML = 
+                'Bunga: <span>' + bungaTunggal.toFixed(2) + '</span><br>Total: <span>' + total.toFixed(2) + '</span>';
+        }
+
+        // Fungsi untuk menghitung bunga majemuk
+        function hitungBungaMajemuk() {
+            var principal = parseFloat(document.getElementById('principal-majemuk').value);
+            var rate = parseFloat(document.getElementById('rate-majemuk').value) / 100;
+            var time = parseFloat(document.getElementById('time-majemuk').value);
+            var n = parseFloat(document.getElementById('n-majemuk').value);
+
+            var total = principal * Math.pow((1 + rate / n), n * time);
+            var bungaMajemuk = total - principal;
+
+            document.getElementById('result-majemuk').innerHTML = 
+                'Bunga: <span>' + bungaMajemuk.toFixed(2) + '</span><br>Total: <span>' + total.toFixed(2) + '</span>';
+        }
+    </script>
+
+</body>
+</html>
